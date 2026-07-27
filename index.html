@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Трансляція — журнал ефіру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="statusbar">
+  <div><span class="dot"></span><span id="clock">--:--:--</span> · КАНАЛ АКТИВНИЙ</div>
+  <div class="right">
+    <span id="count">0 записів</span>
+    <a class="admin-link" href="admin.html">панель керування →</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="eyebrow">Журнал ефіру</div>
+  <h1>Трансляції, відео та новини — в одному місці</h1>
+  <p class="sub">Свіжі посилання, які я поширюю в Discord і Telegram, збираються тут у хронологічному порядку.</p>
+</header>
+
+<main class="feed" id="feed">
+  <div class="empty">Завантаження стрічки…</div>
+</main>
+
+<script src="config.js"></script>
+<script>
+function fmtDate(iso){
+  const d = new Date(iso);
+  if(isNaN(d)) return "";
+  const dd = String(d.getDate()).padStart(2,'0');
+  const mm = String(d.getMonth()+1).padStart(2,'0');
+  const yy = d.getFullYear();
+  const hh = String(d.getHours()).padStart(2,'0');
+  const mi = String(d.getMinutes()).padStart(2,'0');
+  return `${dd}.${mm}.${yy} · ${hh}:${mi}`;
+}
+
+const TAG_LABEL = { stream: "Ефір", video: "Відео", news: "Новина" };
+
+function render(posts){
+  const feed = document.getElementById('feed');
+  const count = document.getElementById('count');
+  count.textContent = posts.length + (posts.length === 1 ? " запис" : " записів");
+
+  if(!posts.length){
+    feed.innerHTML = '<div class="empty">Ще немає записів. Додай перший через панель керування.</div>';
+    return;
+  }
+
+  const sorted = [...posts].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  feed.innerHTML = sorted.map((p, i) => {
+    const code = "CH-" + String(sorted.length - i).padStart(3, '0');
+    const tagClass = ['stream','video','news'].includes(p.type) ? p.type : 'news';
+    return `
+      <article class="entry">
+        <div class="channel">${code}</div>
+        <span class="tag ${tagClass}">${TAG_LABEL[tagClass]}</span>
+        <h2>${escapeHtml(p.title || "Без назви")}</h2>
+        ${p.description ? `<p>${escapeHtml(p.description)}</p>` : ""}
+        ${(p.platforms && p.platforms.length) ? `<div class="platform-badges">${p.platforms.map(pl => `<a class="platform-badge" href="${escapeAttr(pl.url)}" target="_blank" rel="noopener">${escapeHtml(pl.label)}</a>`).join('')}</div>` : ""}
+        <div class="meta">${fmtDate(p.date)}</div>
+        <a class="go" href="${escapeAttr(p.url)}" target="_blank" rel="noopener">Перейти за посиланням →</a>
+      </article>
+    `;
+  }).join('');
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function escapeAttr(s){ return escapeHtml(s); }
+
+async function loadPosts(){
+  try{
+    // cache-bust so viewers see new posts immediately after publishing
+    const res = await fetch('posts.json?t=' + Date.now());
+    if(!res.ok) throw new Error('no posts.json');
+    const posts = await res.json();
+    render(posts);
+  }catch(e){
+    document.getElementById('feed').innerHTML = '<div class="empty">Не вдалося завантажити стрічку.</div>';
+  }
+}
+
+function tickClock(){
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('uk-UA');
+}
+tickClock();
+setInterval(tickClock, 1000);
+loadPosts();
+</script>
+</body>
+</html>

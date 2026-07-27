@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Панель керування — Журнал ефіру</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="statusbar">
+  <div><span class="dot"></span>ПАНЕЛЬ КЕРУВАННЯ</div>
+  <div class="right"><a class="admin-link" href="index.html">← до стрічки</a></div>
+</div>
+
+<div class="admin-wrap">
+  <h1>Панель керування</h1>
+  <p class="sub">Публікація записує зміни напряму у файл <code>posts.json</code> твого репозиторію, а сповіщення летить у Discord через вебхук.</p>
+
+  <div class="panel">
+    <h3>Доступ до GitHub</h3>
+    <label for="token">Personal Access Token</label>
+    <input type="password" id="token" placeholder="ghp_..." autocomplete="off">
+    <p class="hint">Токен зберігається лише у твоєму браузері (localStorage). Як створити — дивись README.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Мої платформи</h3>
+    <p class="hint" style="margin-bottom:14px;">Встав посилання на свої канали. Це не пароль і не OAuth — просто посилання, яке буде використовуватись у сповіщеннях і на кнопках нижче.</p>
+
+    <label for="ytLink">YouTube — посилання на канал</label>
+    <input type="url" id="ytLink" placeholder="https://youtube.com/@твійканал">
+
+    <label for="ttLink">TikTok — посилання на профіль</label>
+    <input type="url" id="ttLink" placeholder="https://tiktok.com/@твійпрофіль">
+
+    <label for="twLink">Twitch — посилання на канал</label>
+    <input type="url" id="twLink" placeholder="https://twitch.tv/твійканал">
+
+    <label for="webhook">Discord Webhook URL</label>
+    <input type="password" id="webhook" placeholder="https://discord.com/api/webhooks/...">
+    <p class="hint">Створюється в Discord: Налаштування каналу → Інтеграції → Вебхуки → Новий вебхук → Скопіювати URL.</p>
+
+    <button class="btn-primary" id="saveSettingsBtn" style="background:var(--surface-2);color:var(--text);border:1px solid var(--border);">Зберегти платформи</button>
+    <div class="status-msg" id="settingsStatus"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Швидка дія</h3>
+    <div class="quick-actions">
+      <button type="button" class="quick-btn stream" id="quickStream">🔴 Повідомити про трансляцію</button>
+      <button type="button" class="quick-btn video" id="quickVideo">🎬 Повідомити про відео</button>
+    </div>
+  </div>
+
+  <div class="panel" id="composer">
+    <h3>Новий запис</h3>
+
+    <label>Тип</label>
+    <div class="type-select" id="typeSelect">
+      <button type="button" class="type-btn stream active" data-type="stream">Ефір</button>
+      <button type="button" class="type-btn video" data-type="video">Відео</button>
+      <button type="button" class="type-btn news" data-type="news">Новина</button>
+    </div>
+
+    <label>Де це відбувається</label>
+    <div class="chip-row" id="platformChips">
+      <p class="hint">Додай посилання на платформи вище, щоб вибрати їх тут.</p>
+    </div>
+
+    <label for="title">Заголовок</label>
+    <input type="text" id="title" placeholder="Наприклад: Прямий ефір сьогодні о 20:00">
+
+    <label for="description">Опис (необов'язково)</label>
+    <textarea id="description" placeholder="Коротко, про що це"></textarea>
+
+    <label for="url">Пряме посилання на трансляцію/відео</label>
+    <input type="url" id="url" placeholder="https://...">
+
+    <label class="checkbox-row">
+      <input type="checkbox" id="notifyDiscord" checked>
+      <span>Надіслати сповіщення в Discord</span>
+    </label>
+    <label class="checkbox-row" id="everyoneRow">
+      <input type="checkbox" id="mentionEveryone">
+      <span>Позначити @everyone</span>
+    </label>
+
+    <button class="btn-primary" id="publishBtn">Опублікувати</button>
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Наявні записи</h3>
+    <div class="existing-list" id="existingList">
+      <p class="hint">Завантаження…</p>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script>
+const API_BASE = `https://api.github.com/repos/${SITE_CONFIG.OWNER}/${SITE_CONFIG.REPO}/contents/posts.json`;
+const tokenInput = document.getElementById('token');
+const statusMsg = document.getElementById('statusMsg');
+const publishBtn = document.getElementById('publishBtn');
+const existingList = document.getElementById('existingList');
+const notifyDiscordChk = document.getElementById('notifyDiscord');
+const mentionEveryoneChk = document.getElementById('mentionEveryone');
+
+const PLATFORM_META = {
+  youtube: { label: 'YouTube', color: '#ff0000' },
+  tiktok:  { label: 'TikTok',  color: '#e8eaed' },
+  twitch:  { label: 'Twitch',  color: '#9146ff' },
+};
+
+function loadSettings(){
+  try{ return JSON.parse(localStorage.getItem('site_settings') || '{}'); }
+  catch(e){ return {}; }
+}
+function saveSettings(s){ localStorage.setItem('site_settings', JSON.stringify(s)); }
+
+const settingsFields = {
+  youtube: document.getElementById('ytLink'),
+  tiktok: document.getElementById('ttLink'),
+  twitch: document.getElementById('twLink'),
+  webhook: document.getElementById('webhook'),
+};
+
+(function initSettings(){
+  const s = loadSettings();
+  Object.keys(settingsFields).forEach(k => { settingsFields[k].value = s[k] || ''; });
+})();
+
+document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+  const s = {};
+  Object.keys(settingsFields).forEach(k => { s[k] = settingsFields[k].value.trim(); });
+  saveSettings(s);
+  const el = document.getElementById('settingsStatus');
+  el.textContent = 'Збережено.';
+  el.className = 'status-msg show ok';
+  setTimeout(() => el.classList.remove('show'), 2500);
+  renderPlatformChips();
+});
+
+let selectedPlatforms = new Set();
+
+function renderPlatformChips(){
+  const s = loadSettings();
+  const wrap = document.getElementById('platformChips');
+  const active = Object.keys(PLATFORM_META).filter(k => s[k]);
+  if(!active.length){
+    wrap.innerHTML = '<p class="hint">Додай посилання на платформи вище, щоб вибрати їх тут.</p>';
+    selectedPlatforms.clear();
+    return;
+  }
+  wrap.innerHTML = active.map(k => `
+    <button type="button" class="chip" data-platform="${k}">${PLATFORM_META[k].label}</button>
+  `).join('');
+  wrap.querySelectorAll('.chip').forEach(chip => {
+    const key = chip.dataset.platform;
+    if(selectedPlatforms.has(key)) chip.classList.add('active');
+    chip.addEventListener('click', () => {
+      if(selectedPlatforms.has(key)){ selectedPlatforms.delete(key); chip.classList.remove('active'); }
+      else{ selectedPlatforms.add(key); chip.classList.add('active'); }
+    });
+  });
+}
+renderPlatformChips();
+
+let currentType = 'stream';
+function setType(type){
+  currentType = type;
+  document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === type));
+  document.getElementById('everyoneRow').style.display = (type === 'news') ? 'none' : 'flex';
+}
+document.querySelectorAll('.type-btn').forEach(btn => {
+  btn.addEventListener('click', () => setType(btn.dataset.type));
+});
+setType('stream');
+
+document.getElementById('quickStream').addEventListener('click', () => {
+  setType('stream');
+  document.getElementById('composer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('title').focus();
+});
+document.getElementById('quickVideo').addEventListener('click', () => {
+  setType('video');
+  document.getElementById('composer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('title').focus();
+});
+
+tokenInput.value = localStorage.getItem('gh_token') || '';
+tokenInput.addEventListener('change', () => {
+  localStorage.setItem('gh_token', tokenInput.value.trim());
+});
+
+function showStatus(msg, ok){
+  statusMsg.textContent = msg;
+  statusMsg.className = 'status-msg show ' + (ok ? 'ok' : 'err');
+}
+
+function getToken(){
+  const t = tokenInput.value.trim();
+  if(!t){ showStatus('Спочатку встав свій Personal Access Token.', false); return null; }
+  return t;
+}
+
+async function fetchPostsFile(){
+  const token = getToken();
+  if(!token) return null;
+  const res = await fetch(API_BASE + `?ref=${SITE_CONFIG.BRANCH}`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+  });
+  if(!res.ok){
+    if(res.status === 404) return { posts: [], sha: null };
+    throw new Error(`GitHub API помилка: ${res.status}`);
+  }
+  const data = await res.json();
+  const content = decodeURIComponent(escape(atob(data.content)));
+  return { posts: JSON.parse(content || '[]'), sha: data.sha };
+}
+
+async function writePostsFile(posts, sha, message){
+  const token = getToken();
+  if(!token) return false;
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(posts, null, 2)))),
+    branch: SITE_CONFIG.BRANCH,
+  };
+  if(sha) body.sha = sha;
+  const res = await fetch(API_BASE, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  if(!res.ok){
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `GitHub API помилка: ${res.status}`);
+  }
+  return true;
+}
+
+async function loadExisting(){
+  try{
+    const { posts } = await fetchPostsFile();
+    renderExisting(posts || []);
+  }catch(e){
+    existingList.innerHTML = `<p class="hint">Встав токен вище, щоб побачити наявні записи.</p>`;
+  }
+}
+
+function renderExisting(posts){
+  if(!posts.length){
+    existingList.innerHTML = `<p class="hint">Записів ще немає.</p>`;
+    return;
+  }
+  const sorted = [...posts].sort((a,b) => new Date(b.date) - new Date(a.date));
+  existingList.innerHTML = sorted.map(p => `
+    <div class="existing-row">
+      <span class="t">${escapeHtml(p.title || 'Без назви')}</span>
+      <button data-id="${p.id}">Видалити</button>
+    </div>
+  `).join('');
+  existingList.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => deletePost(btn.dataset.id));
+  });
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+async function deletePost(id){
+  if(!confirm('Видалити цей запис?')) return;
+  try{
+    const { posts, sha } = await fetchPostsFile();
+    const updated = posts.filter(p => p.id !== id);
+    await writePostsFile(updated, sha, `Видалено запис ${id}`);
+    showStatus('Запис видалено.', true);
+    renderExisting(updated);
+  }catch(e){
+    showStatus('Помилка: ' + e.message, false);
+  }
+}
+
+async function sendDiscordNotification(post, platformLinks, mentionEveryone){
+  const s = loadSettings();
+  if(!s.webhook) throw new Error('Спочатку встав Discord Webhook URL у налаштуваннях платформ.');
+
+  const isStream = post.type === 'stream';
+  const headline = isStream ? '🔴 Наживо просто зараз!' : '🎬 Нове відео!';
+  const color = isStream ? 0x5eead4 : 0xf5a623;
+
+  const fields = [];
+  if(platformLinks.length){
+    fields.push({
+      name: 'Платформи',
+      value: platformLinks.map(p => `[${p.label}](${p.url})`).join(' • '),
+    });
+  }
+
+  const embed = {
+    title: post.title,
+    description: post.description || undefined,
+    url: post.url || undefined,
+    color,
+    fields,
+    timestamp: post.date,
+  };
+
+  const payload = {
+    content: mentionEveryone ? `@everyone ${headline}` : headline,
+    embeds: [embed],
+  };
+
+  const res = await fetch(s.webhook, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if(!res.ok){
+    throw new Error(`Discord відхилив запит: ${res.status}`);
+  }
+}
+
+publishBtn.addEventListener('click', async () => {
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const url = document.getElementById('url').value.trim();
+
+  if(!title || !url){
+    showStatus('Заповни принаймні заголовок і посилання.', false);
+    return;
+  }
+  if(SITE_CONFIG.OWNER === 'your-github-username'){
+    showStatus('Спочатку заповни config.js своїми даними (OWNER і REPO).', false);
+    return;
+  }
+
+  const s = loadSettings();
+  const platformLinks = [...selectedPlatforms].map(k => ({ label: PLATFORM_META[k].label, url: s[k] }));
+
+  publishBtn.disabled = true;
+  showStatus('Публікація…', true);
+
+  try{
+    const { posts, sha } = await fetchPostsFile();
+    const newPost = {
+      id: 'p' + Date.now(),
+      type: currentType,
+      title, description, url,
+      platforms: platformLinks,
+      date: new Date().toISOString(),
+    };
+    const updated = [...posts, newPost];
+    await writePostsFile(updated, sha, `Новий запис: ${title}`);
+
+    let discordMsg = '';
+    if(notifyDiscordChk.checked){
+      try{
+        await sendDiscordNotification(newPost, platformLinks, mentionEveryoneChk.checked);
+        discordMsg = ' Сповіщення надіслано в Discord.';
+      }catch(e){
+        discordMsg = ' Але Discord: ' + e.message;
+      }
+    }
+
+    showStatus('Опубліковано!' + discordMsg, true);
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('url').value = '';
+    selectedPlatforms.clear();
+    renderPlatformChips();
+    renderExisting(updated);
+  }catch(e){
+    showStatus('Помилка: ' + e.message, false);
+  }finally{
+    publishBtn.disabled = false;
+  }
+});
+
+loadExisting();
+</script>
+</body>
+</html>
