@@ -12,5 +12,23 @@
       }
     ],
     "date": "2026-07-27T12:01:02.762Z"
+  },
+  {
+    "id": "p1785484738052",
+    "type": "stream",
+    "title": "Проходження гри під назвою Eriksholm: The Stolen Dream",
+    "description": "Eriksholm: The Stolen Dream — це пригодницька стелс-гра з ізометричною перспективою, що дозволяє гравцеві вільно керувати камерою для кращого огляду оточення.",
+    "url": "https://youtube.com/live/UyVjmV4dgbI?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      }
+    ],
+    "date": "2026-07-31T07:58:58.052Z"
   }
 ]
