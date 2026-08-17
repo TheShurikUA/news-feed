@@ -228,5 +228,27 @@
       }
     ],
     "date": "2026-08-16T08:59:31.966Z"
+  },
+  {
+    "id": "p1786954911912",
+    "type": "stream",
+    "title": "Стартую з табору ШЕВЧЕНКО в ЗОНІ",
+    "description": "Сталкер це ІМБУЛЬКА)",
+    "url": "https://youtube.com/live/oJ2NCah2rxI?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-17T08:21:51.912Z"
   }
 ]
