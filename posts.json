@@ -272,5 +272,27 @@
       }
     ],
     "date": "2026-08-18T08:04:53.451Z"
+  },
+  {
+    "id": "p1787133272115",
+    "type": "stream",
+    "title": "Відправляюся на штурм \"ДУГИ\"",
+    "description": "",
+    "url": "https://youtube.com/live/NmqLlCeSs6I?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-19T09:54:32.115Z"
   }
 ]
