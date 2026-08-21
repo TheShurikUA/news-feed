@@ -294,5 +294,27 @@
       }
     ],
     "date": "2026-08-19T09:54:32.115Z"
+  },
+  {
+    "id": "p1787296659557",
+    "type": "stream",
+    "title": "Дослідження Зони продовжується)",
+    "description": "",
+    "url": "https://youtube.com/live/wyaV95kXTPs?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-21T07:17:39.557Z"
   }
 ]
