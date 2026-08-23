@@ -334,5 +334,23 @@
       }
     ],
     "date": "2026-08-22T07:06:26.161Z"
+  },
+  {
+    "id": "p1787471209347",
+    "type": "stream",
+    "title": "Стартую з ПК \"Енергетик\"",
+    "description": "",
+    "url": "https://youtube.com/live/aVx7aYrR-Q8?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-23T07:46:49.347Z"
   }
 ]
