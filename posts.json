@@ -352,5 +352,23 @@
       }
     ],
     "date": "2026-08-23T07:46:49.347Z"
+  },
+  {
+    "id": "p1787554687556",
+    "type": "stream",
+    "title": "Нарешті по DLC",
+    "description": "",
+    "url": "https://youtube.com/live/RjWyOjZeJEs?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-24T06:58:07.556Z"
   }
 ]
