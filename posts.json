@@ -370,5 +370,23 @@
       }
     ],
     "date": "2026-08-24T06:58:07.556Z"
+  },
+  {
+    "id": "p1787645745640",
+    "type": "stream",
+    "title": "Зона, зона, зона .... десь там і ЧАЕС видніється",
+    "description": "",
+    "url": "https://youtube.com/live/srD3xdgh8Hc?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-25T08:15:45.640Z"
   }
 ]
