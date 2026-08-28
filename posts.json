@@ -424,5 +424,23 @@
       }
     ],
     "date": "2026-08-27T09:55:34.102Z"
+  },
+  {
+    "id": "p1787902203152",
+    "type": "stream",
+    "title": "Дістався ЧАЕС (Шлях Зулуса)",
+    "description": "",
+    "url": "https://youtube.com/live/PKXrjwLdp7I?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-28T07:30:03.152Z"
   }
 ]
