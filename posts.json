@@ -460,5 +460,27 @@
       }
     ],
     "date": "2026-08-29T09:16:28.862Z"
+  },
+  {
+    "id": "p1788082967041",
+    "type": "stream",
+    "title": "DAKOTA UA",
+    "description": "",
+    "url": "https://youtube.com/live/IF0LOFyVNf4?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-30T09:42:47.041Z"
   }
 ]
