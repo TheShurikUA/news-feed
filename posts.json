@@ -482,5 +482,23 @@
       }
     ],
     "date": "2026-08-30T09:42:47.041Z"
+  },
+  {
+    "id": "p1788166525832",
+    "type": "stream",
+    "title": "Пошта це теж робота DAKOTA UA",
+    "description": "",
+    "url": "https://youtube.com/live/yloon7MGf8c?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-08-31T08:55:25.832Z"
   }
 ]
