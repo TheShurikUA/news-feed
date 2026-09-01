@@ -514,5 +514,23 @@
       }
     ],
     "date": "2026-08-31T16:40:34.850Z"
+  },
+  {
+    "id": "p1788258097554",
+    "type": "stream",
+    "title": "Трішки справ з'явилося на ранчо",
+    "description": "",
+    "url": "https://youtube.com/live/FY_Gks1l2sg?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-01T10:21:37.554Z"
   }
 ]
