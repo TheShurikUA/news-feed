@@ -532,5 +532,27 @@
       }
     ],
     "date": "2026-09-01T10:21:37.554Z"
+  },
+  {
+    "id": "p1788512876074",
+    "type": "stream",
+    "title": "TheHeadlands Demo┃Медитативна фермерська стратегія",
+    "description": "",
+    "url": "https://youtube.com/live/Jw46k6aAkDU?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-04T09:07:56.074Z"
   }
 ]
