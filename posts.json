@@ -590,5 +590,27 @@
       }
     ],
     "date": "2026-09-06T09:07:14.050Z"
+  },
+  {
+    "id": "p1788773988074",
+    "type": "stream",
+    "title": "Дакотське життя на ранчо в заповіднику",
+    "description": "",
+    "url": "https://youtube.com/live/K8hBhS8g-CA?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-07T09:39:48.074Z"
   }
 ]
