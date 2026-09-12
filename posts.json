@@ -656,5 +656,27 @@
       }
     ],
     "date": "2026-09-11T11:18:17.538Z"
+  },
+  {
+    "id": "p1789216584087",
+    "type": "stream",
+    "title": "Game of Thrones: Kingsroad",
+    "description": "",
+    "url": "https://youtube.com/live/0w0e3tZ5Tmc?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-12T12:36:24.087Z"
   }
 ]
