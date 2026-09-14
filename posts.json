@@ -700,5 +700,27 @@
       }
     ],
     "date": "2026-09-13T08:03:38.947Z"
+  },
+  {
+    "id": "p1789384203766",
+    "type": "stream",
+    "title": "DAKOTA UA┃Перший український RDR2 RP проєкт",
+    "description": "",
+    "url": "https://youtube.com/live/11wKXrx7LbQ?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-14T11:10:03.766Z"
   }
 ]
