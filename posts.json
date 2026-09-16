@@ -744,5 +744,27 @@
       }
     ],
     "date": "2026-09-15T08:03:54.882Z"
+  },
+  {
+    "id": "p1789557375125",
+    "type": "stream",
+    "title": "The Headlands┃НОВИЙ КОНТЕНТ ПІД'ЇХАВ",
+    "description": "https://store.steampowered.com/app/4301110/The_Headlands/",
+    "url": "https://youtube.com/live/G6IzVi2PwC8?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "TikTok",
+        "url": "https://www.tiktok.com/@theshurikua"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-16T11:16:15.125Z"
   }
 ]
