@@ -820,5 +820,23 @@
       }
     ],
     "date": "2026-09-21T07:22:06.622Z"
+  },
+  {
+    "id": "p1789978704455",
+    "type": "stream",
+    "title": "Дакотські будні",
+    "description": "",
+    "url": "https://youtube.com/live/g9bvuRAQNww?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-21T08:18:24.455Z"
   }
 ]
