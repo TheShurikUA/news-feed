@@ -838,5 +838,23 @@
       }
     ],
     "date": "2026-09-21T08:18:24.455Z"
+  },
+  {
+    "id": "p1790070360201",
+    "type": "stream",
+    "title": "SAMSON",
+    "description": "",
+    "url": "https://youtube.com/live/ZYPFSVZxjX4?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-22T09:46:00.201Z"
   }
 ]
