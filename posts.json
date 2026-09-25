@@ -874,5 +874,19 @@
       }
     ],
     "date": "2026-09-24T11:19:00.401Z"
+  },
+  {
+    "id": "p1790332367825",
+    "type": "stream",
+    "title": "Граю в гру",
+    "description": "",
+    "url": "https://youtube.com/live/KUvR3IvcktM?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      }
+    ],
+    "date": "2026-09-25T10:32:47.825Z"
   }
 ]
