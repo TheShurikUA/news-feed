@@ -888,5 +888,23 @@
       }
     ],
     "date": "2026-09-25T10:32:47.825Z"
+  },
+  {
+    "id": "p1790417410261",
+    "type": "stream",
+    "title": "Стрімчанський по Соулфрейму",
+    "description": "Soulframe! Це нова фентезійна екшн-RPG від творців Warframe. Тут ми досліджуємо таємничий світ Альки, відновлюємо спаплюжену природу та змагаємося з древнім злом. На вас чекають важкі й тактичні бої на мечах, магія предків, генеративні підземелля та неймовірна атмосфера фентезі.",
+    "url": "https://youtube.com/live/1GwCNSTmRAE?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-26T10:10:10.261Z"
   }
 ]
