@@ -906,5 +906,23 @@
       }
     ],
     "date": "2026-09-26T10:10:10.261Z"
+  },
+  {
+    "id": "p1790505437926",
+    "type": "stream",
+    "title": "МаФииинкии",
+    "description": "Бі-бі, фа-фа",
+    "url": "https://youtube.com/live/yhA8PvSTI4M?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      },
+      {
+        "label": "Twitch",
+        "url": "https://www.twitch.tv/theshurikua"
+      }
+    ],
+    "date": "2026-09-27T10:37:17.926Z"
   }
 ]
