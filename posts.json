@@ -956,5 +956,19 @@
       }
     ],
     "date": "2026-09-29T09:17:41.210Z"
+  },
+  {
+    "id": "p1790776311015",
+    "type": "stream",
+    "title": "PICKUP VTM",
+    "description": "",
+    "url": "https://youtube.com/live/7iDNyWnzc4I?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      }
+    ],
+    "date": "2026-09-30T13:51:51.015Z"
   }
 ]
