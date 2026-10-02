@@ -970,5 +970,19 @@
       }
     ],
     "date": "2026-09-30T13:51:51.015Z"
+  },
+  {
+    "id": "p1790940873723",
+    "type": "stream",
+    "title": "На полювання",
+    "description": "",
+    "url": "https://youtube.com/live/EyHsPv2I6rs?feature=share",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      }
+    ],
+    "date": "2026-10-02T11:34:33.723Z"
   }
 ]
