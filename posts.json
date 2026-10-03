@@ -984,5 +984,19 @@
       }
     ],
     "date": "2026-10-02T11:34:33.723Z"
+  },
+  {
+    "id": "p1791032701064",
+    "type": "video",
+    "title": "Unshaken/Непохитний",
+    "description": "Українська версія популярного треку з RDR2 Unshaken",
+    "url": "https://youtu.be/Ib2ie4_gh20",
+    "platforms": [
+      {
+        "label": "YouTube",
+        "url": "https://www.youtube.com/@THE_SHURIK_UA"
+      }
+    ],
+    "date": "2026-10-03T13:05:01.064Z"
   }
 ]
